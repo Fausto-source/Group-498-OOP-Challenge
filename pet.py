@@ -11,59 +11,47 @@ class Pet:
     # Let each group member add their methods here
 
     def eat(self):
-     """
-     Reduces hunger by 3, but never lets it go below 0.
-     increases happiness by 1 but doesn't go beyond 10
-     """
-     if self.hunger >= 3:
-        self.hunger -= 3
-     else:
-         self.hunger = 0
-     self.happiness = min(self.happiness + 1, 10)
-     time.sleep(2)
-     print(f"{self.name} has eaten🎉.")
-     time.sleep(1)
+        """Simulate feeding the pet."""
+        self.hunger = max(0, self.hunger - 3)
+        self.happiness = min(10, self.happiness + 1)
+        print(f"{self.name} has been fed!. Hunger level: {self.hunger}, Happiness: {self.happiness},")
 
     def sleep(self):
-     """adds energy by 5 but doesn't go beyond 10"""
-     self.energy = min(self.energy + 5, 10)
-     time.sleep(1)
-     print(f"{self.name} has slept💤💤.")
+        """Simulate letting the pet sleep."""
+        self.energy = min(10, self.energy + 5)
+        print(f"{self.name} has already slept. Energy level: {self.energy},")
 
     def play(self):
-        """Decreases energy by 2 and increase happiness by 1"""
-        if self.energy >= 2:
-            self.energy -= 2
-            self.happiness = min(self.happiness + 2, 10)
-            self.hunger = min(self.hunger + 1, 10)
-            print("You played with your pet.")
+        """Simulate playing with the pet."""
+        if self.energy > 0:
+            self.happiness = min(10, self.happiness + 2)
+            self.energy = max(0, self.energy - 2)
+            self.hunger = max(0, self.hunger + 1)
+            print(f"{self.name} is playing! Happiness: {self.happiness}, Energy: {self.energy}, hunger: {self.hunger}")
         else:
-            print(f"{self.name} is too tired to play😔.")
-    
-    def sleep(self):
-        """Increases energy by 5 but doesn't go beyond 10"""
-        self.energy = min(self.energy + 5, 10)
-        print(f"{self.name} has slept.")
+            print(f"{self.name} is too tired to play.")
 
     def get_status(self):
-        """Prints the current status of the pet"""
-        print(f"\n{self.name}'s current status: \n🍚 Hunger: {self.hunger}\n⚡ Energy: {self.energy}\n🐱 Happiness: {self.happiness}\n🎃 Tricks: {', '.join(self.tricks) if self.tricks else f'{self.name} doesn\'t know any tricks yet.'}")
-        time.sleep(5)
+        """Display the pet's current status."""
+        print(f"Pet Name: {self.name}:")
+        print(f"Hunger Level: {self.hunger}/10")
+        print(f"Energy Level: {self.energy}/10")
+        print(f"Happiness Level: {self.happiness}/10")
+        print("Tricks Learned: " + ", ".join(self.tricks) if self.tricks else "No tricks learned yet.")
+        print("==============================================")
 
     def train(self, trick):
-        """Teach the pet a new trick"""
-        if trick in self.tricks:
-            print(f"{self.name} already knows '{trick}'.")
-        else:
-            self.tricks.append(trick)
-            print(f"\nSuccessfully taught {self.name} the trick '{trick}🎉'!")
-            time.sleep(4)
-            
+        """Teach the pet a new trick."""
+        if len(trick) < 3 or len(trick) > 20 or not trick.isalpha():
+            print("Invalid trick name. Please enter a name between 3 and 20 characters, containing only letters.")
+            return
+        self.tricks.append(trick)
+        self.happiness = min(10, self.happiness + 2)
+        print(f" ,{self.name} has learned the trick: {trick}! Happiness: {self.happiness},")
+
     def show_tricks(self):
-        # Show the pet's tricks
-        if not self.tricks:
-            print(f"{self.name} doesn't know any tricks yet😔.")
+        """Display all tricks the pet knows."""
+        if self.tricks:
+            print(f"{self.name} knows the following tricks: {', '.join(self.tricks)}")
         else:
-            print(f"\n{self.name}'s tricks:")
-            for i, trick in enumerate(self.tricks, 1):
-                print(f"{i}. 🎃 {trick}")
+            print(f"{self.name} doesn't know any tricks yet.")                                            

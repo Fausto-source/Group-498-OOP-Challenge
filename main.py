@@ -4,8 +4,6 @@ import time
 - This is a simple pet simulator program that allows users to create a pet and interact with it.
 - The user can feed the pet, play with it, teach it tricks, and check its status.
 - The program uses a class to represent the pet and its attributes, and it provides a simple text-based interface for user interaction.
-- The program is designed to be easy to use and understand, making it suitable for beginners in programming.
-- The program is written in Python and uses basic programming concepts such as classes, methods, and user input.
 - The program is designed to be run in a terminal or command prompt, and it provides clear instructions for the user to follow.
 """
 
@@ -26,7 +24,7 @@ print("==============================================")
 print("Welcome to the Pet Simulator!")
 print("You can create a pet and interact with it.")
 print("Let's get started!")
-name = input("Please enter the name of your pet: ")
+name = input("Please enter the name you would like to give your pet: ")
 
 userPet = pet.Pet(name)
 print("==============================================")
@@ -51,7 +49,7 @@ while True:
         if userChoice < 1 or userChoice > 7:
             raise ValueError
     except ValueError:
-        print("Invalid input. Please enter a number between 1 and 5.")
+        print("Invalid input. Please enter a number between 1 and 7.")
         print("==============================================")
         time.sleep(2)  # Adding a delay for better readability
 
@@ -67,7 +65,7 @@ while True:
         userPet.play()
         userPet.get_status()
     elif userChoice == 3:
-        trick = input("🎃 Please enter the trick you want to teach your pet: ")
+        trick = input("Please enter the trick you want to teach your pet: ")
         loading("teach", userPet.name)
         # Simulate teaching the pet a trick
         if trick == "":
